@@ -2,7 +2,7 @@
 
 public static class Problem21
 {
-    // NOTE: This solution modifies the original lists by rearranging the nodes, it does not create new nodes.
+    // NOTE: This solution modifies the original lists by rearranging the nodes, it does not create new nodes
     public static ListNode MergeTwoLists(ListNode list1, ListNode list2)
     {
         var cursor1 = list1;
@@ -101,6 +101,35 @@ public static class Problem21
         }
 
         return head;
+    }
+
+    // NOTE: This solution does not modify the original lists, it creates new nodes
+    public static ListNode MergeTwoListsRecursive(ListNode list1, ListNode list2)
+    {
+        if (list1 == null)
+        {
+            return list2;
+        }
+
+        if (list2 == null)
+        {
+            return list1;
+        }
+
+        var node = new ListNode();
+
+        if (list1.val < list2.val)
+        {
+            node.val = list1.val;
+            node.next = MergeTwoListsRecursive(list1.next, list2);
+        }
+        else
+        {
+            node.val = list2.val;
+            node.next = MergeTwoListsRecursive(list1, list2.next);
+        }
+
+        return node;
     }
 
     public class ListNode

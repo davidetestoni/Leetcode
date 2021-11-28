@@ -20,14 +20,20 @@ public class Problem21Tests
         var list2 = Problem21.ListNode.FromArray(second);
         var merged = Problem21.MergeTwoLists(list1, list2);
 
+        // Recreate the lists, we cannot reuse them since the method above might modify them
+        list1 = Problem21.ListNode.FromArray(first);
+        list2 = Problem21.ListNode.FromArray(second);
+        var mergedRecursive = Problem21.MergeTwoListsRecursive(list1, list2);
+
         if (output.Length == 0)
         {
             Assert.Null(merged);
+            Assert.Null(mergedRecursive);
         }
         else
         {
-            var array = merged.ToArray();
-            Assert.True(array.SequenceEqual(output));
+            Assert.True(merged.ToArray().SequenceEqual(output));
+            Assert.True(mergedRecursive.ToArray().SequenceEqual(output));
         }
     }
 }
